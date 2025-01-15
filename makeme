@@ -1,31 +1,81 @@
 #!/bin/bash
 
-#touch Makefile
+#Colors 
+RED='\e[0;31m'
+WHITE='\e[0;37m'
+GREEN='\e[0;32m'
 
 check_number(){
  until [[ $exe =~ ^[0-9]+$ ]]; do
     read exe 
     if ! [[ $exe =~ ^[0-9]+$ ]];then
-      echo "Enter a valid number"
+      echo -e "${RED}Enter a valid number ${WHITE}"
     fi 
  done 
 }
+
+check_if_exist(){
+  while  [[ -d $project ]]; do
+    echo -e "${RED}There is a Directory with that name\nEnter a new name ${WHITE} "
+    read project
+  done
+}
+create_directories(){  
+mkdir $project
+cd $project
+mkdir src
+mkdir includes
+touch Makefile
+touch Includes.mk
+echo "include Includes.mk" >> Makefile
+echo -e "CC= cc \nCFLAG= -Wall -Werror -Werror -I.includes/ " >> Makefile
+echo -e "SRC_DIR= src \nOBJ_DIR= build" >> Makefile
+echo -e "NAME= $project ">> Makefile
+echo -e 'SRCSDIR= $(addperfix src/,$(SRCS))' >> Makefile
+echo -e 'OBJS= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCSDIR)) \n' >> Makefile
+echo -e 'all:$(NAME)' >> Makefile
+echo -e '\t$(NAME):$(OBS)' >> Makefile
+echo -e '\t$(CC) $(OBJS) $(CFLAGS) -o $(NAME)' >> Makefile
+echo -e '$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c\n\t@mkdir -p $(OBJ_DIR)\n\t$(CC) $(CFLAGS) -c $< -o $@' >> Makefile
+echo -e 'clean:\n\trm -f $(OBJS)' >> Makefile
+echo -e 'fclean:clean\n\trm -f $(NAME) ' >> Makefile
+echo -e 're: fclean all' >> Makefile
+echo -e '.PHONY: all clean fclean re' >> Makefile
+cd ..
+}
+
+git_init(){
+  git init 
+  git add .
+  git commit -m "First Commit"
+}
 if [[ -z $1 ]]; then
-  echo "Project name: "
-  read project
+  read -p "Project name: " project 
+  check_if_exist
 else
   project=$1
-  echo "project name is $project"
+  check_if_exist
 fi 
+echo -e "${GREEN}Project name is $project ${WHITE}" 
 
-if [[ $2 -eq 0 ]]; then
+if [[ -z $2 ]]; then
   echo "How many executble is there ?"
   check_number
 else
   exe=$2
-  if ! [[ $exe =~ ^[0-9]+$ ]];then 
+  if ! [[ $exe =~ ^[0-9]+$ ]];then
+    echo -e "${RED}Enter a valid number ${WHITE}"
     check_number
   fi 
 fi 
-echo "I'll create $exe executbles"
+echo -e  "${GREEN}I'll create $exe Directories ${WHITE}"
+
+mkdir $project
+cd $project
+for ((i = 1; i <= $exe; i++)); do
+  read -p "Enter $i Directory's name: " project
+  check_if_exist
+  create_directories
+done
+git_init
 
