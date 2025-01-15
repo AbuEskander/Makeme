@@ -1,6 +1,6 @@
 include Includes.mk
 CC= cc 
-CFLAG= -Wall -Werror -Werror -I.includes/ 
+CFLAGS= -Wall -Werror -Werror -I.includes/ 
 SRC_DIR= src 
 OBJ_DIR= build
 NAME= basil 

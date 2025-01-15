@@ -32,7 +32,7 @@ touch Makefile
 touch Includes.mk
 create_temp_files
 echo "include Includes.mk" >> Makefile
-echo -e "CC= cc \nCFLAG= -Wall -Werror -Werror -I.includes/ " >> Makefile
+echo -e "CC= cc \nCFLAGS= -Wall -Werror -Werror -I.includes/ " >> Makefile
 echo -e "SRC_DIR= src \nOBJ_DIR= build" >> Makefile
 echo -e "NAME= $project ">> Makefile
 echo -e 'SRCSDIR= $(addprefix src/,$(SRCS))' >> Makefile
