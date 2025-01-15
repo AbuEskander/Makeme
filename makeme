@@ -20,6 +20,10 @@ check_if_exist(){
     read project
   done
 }
+create_temp_files(){
+  touch src/main.c
+  echo -e 'SRCS= \\n\tmain.c' >> Includes.mk
+}
 create_directories(){  
 mkdir src
 mkdir includes
