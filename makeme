@@ -24,13 +24,26 @@ create_temp_files(){
   touch src/main.c
   echo -e 'SRCS= \' >> Includes.mk
   echo -e '\tmain.c' >> Includes.mk
+
 }
+
+inital_main()
+{
+  echo  "#include <stdio.h>
+  int main(void)
+  {
+    printf(\"Hey from $project\");
+    return (0);
+  }" >> src/main.c
+}
+
 create_directories(){  
 mkdir src
 mkdir includes
 touch Makefile
 touch Includes.mk
 create_temp_files
+inital_main
 echo "include Includes.mk" >> Makefile
 echo -e "CC= cc \nCFLAGS= -Wall -Werror -Werror -I.includes/ " >> Makefile
 echo -e "SRC_DIR= src \nOBJ_DIR= build" >> Makefile
