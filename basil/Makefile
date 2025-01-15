@@ -1,7 +1,7 @@
 include Includes.mk
 CC = cc 
 CFLAGS = -Wall -Werror -Werror -I.includes/ 
-SRC_DIR = src 
+SRC_DIR = src
 OBJ_DIR = build
 NAME = basil 
 SRCSDIR = $(addprefix src/,$(SRCS))
