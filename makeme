@@ -51,7 +51,7 @@ echo -e "NAME= $project ">> Makefile
 echo -e 'SRCSDIR= $(addprefix src/,$(SRCS))' >> Makefile
 echo -e 'OBJS= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCSDIR)) \n' >> Makefile
 echo -e 'all:$(NAME)' >> Makefile
-echo -e '$(NAME):$(OBS)' >> Makefile
+echo -e '$(NAME):$(OBJS)' >> Makefile
 echo -e '\t$(CC) $(OBJS) $(CFLAGS) -o $(NAME)' >> Makefile
 echo -e '$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c\n\t@mkdir -p $(OBJ_DIR)\n\t$(CC) $(CFLAGS) -c $< -o $@' >> Makefile
 echo -e 'clean:\n\trm -f $(OBJS)' >> Makefile
