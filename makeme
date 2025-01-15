@@ -58,7 +58,6 @@ echo -e 'clean:\n\trm -f $(OBJS)' >> Makefile
 echo -e 'fclean:clean\n\trm -f $(NAME) ' >> Makefile
 echo -e 're: fclean all' >> Makefile
 echo -e '.PHONY: all clean fclean re' >> Makefile
-cd ..
 }
 
 git_init(){
@@ -97,6 +96,7 @@ for ((i = 1; i <= $exe; i++)); do
   mkdir $project
   cd $project
   create_directories
+  cd ..
 done
 else
   create_directories
