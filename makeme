@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#touch Makefile
+
+check_number(){
+ until [[ $exe =~ ^[0-9]+$ ]]; do
+    read exe 
+    if ! [[ $exe =~ ^[0-9]+$ ]];then
+      echo "Enter a valid number"
+    fi 
+ done 
+}
+if [[ -z $1 ]]; then
+  echo "Project name: "
+  read project
+else
+  project=$1
+  echo "project name is $project"
+fi 
+
+if [[ $2 -eq 0 ]]; then
+  echo "How many executble is there ?"
+  check_number
+else
+  exe=$2
+  if ! [[ $exe =~ ^[0-9]+$ ]];then 
+    check_number
+  fi 
+fi 
+echo "I'll create $exe executbles"
+
