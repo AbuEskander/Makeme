@@ -1,13 +1,14 @@
 include Includes.mk
-CC= cc 
-CFLAGS= -Wall -Werror -Werror -I.includes/ 
-SRC_DIR= src 
-OBJ_DIR= build
-NAME= basil 
-SRCSDIR= $(addprefix src/,$(SRCS))
-OBJS= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCSDIR)) 
+CC = cc 
+CFLAGS = -Wall -Werror -Werror -I.includes/ 
+SRC_DIR = src 
+OBJ_DIR = build
+NAME = basil 
+SRCSDIR = $(addprefix src/,$(SRCS))
+OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCSDIR)) 
 
 all:$(NAME)
+
 $(NAME):$(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
