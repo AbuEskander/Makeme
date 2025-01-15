@@ -4,7 +4,7 @@
 RED='\e[0;31m'
 WHITE='\e[0;37m'
 GREEN='\e[0;32m'
-
+YELLOW='\e[0;33m'
 check_number(){
  until [[ $exe =~ ^[0-9]+$ ]]; do
     read exe 
@@ -21,8 +21,6 @@ check_if_exist(){
   done
 }
 create_directories(){  
-mkdir $project
-cd $project
 mkdir src
 mkdir includes
 touch Makefile
@@ -47,7 +45,8 @@ cd ..
 git_init(){
   git init 
   git add .
-  git commit -m "First Commit"
+  git commit -m "First Commit" --quiet
+  echo -e "${GREEN}Git has been initilalized and Commited first Commit"
 }
 if [[ -z $1 ]]; then
   read -p "Project name: " project 
@@ -72,10 +71,16 @@ echo -e  "${GREEN}I'll create $exe Directories ${WHITE}"
 
 mkdir $project
 cd $project
+if [[ $exe > 1 ]];then 
 for ((i = 1; i <= $exe; i++)); do
   read -p "Enter $i Directory's name: " project
   check_if_exist
+  mkdir $project
+  cd $project
   create_directories
 done
+else
+  create_directories
+fi 
 git_init
-
+echo -e "${GREEN}All good\n${YELLOW}Enjoy you're CODING ${RED}<3 "
