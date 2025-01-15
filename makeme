@@ -43,7 +43,7 @@ cd ..
 }
 
 git_init(){
-  git init 
+  git init --quiet 
   git add .
   git commit -m "First Commit" --quiet
   echo -e "${GREEN}Git has been initilalized and Commited first Commit"
