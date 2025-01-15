@@ -3,7 +3,7 @@ CC= cc
 CFLAG= -Wall -Werror -Werror -I.includes/ 
 SRC_DIR= src 
 OBJ_DIR= build
-NAME= Basil 
+NAME= basil 
 SRCSDIR= $(addperfix src/,$(SRCS))
 OBJS= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCSDIR)) 
 

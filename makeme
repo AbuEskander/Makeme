@@ -23,7 +23,7 @@ check_if_exist(){
 create_temp_files(){
   touch src/main.c
   echo -e 'SRCS= \' >> Includes.mk
-  echo -e '\tmain.c'
+  echo -e '\tmain.c' >> Includes.mk
 }
 create_directories(){  
 mkdir src
