@@ -1,2 +1,0 @@
-SRCS= \
-	main.c
