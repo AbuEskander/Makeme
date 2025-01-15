@@ -8,7 +8,7 @@ SRCSDIR= $(addperfix src/,$(SRCS))
 OBJS= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCSDIR)) 
 
 all:$(NAME)
-	$(NAME):$(OBS)
+$(NAME):$(OBS)
 	$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
