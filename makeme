@@ -6,58 +6,58 @@ WHITE='\e[0;37m'
 GREEN='\e[0;32m'
 YELLOW='\e[0;33m'
 check_number(){
- until [[ $exe =~ ^[0-9]+$ ]]; do
-    read exe 
-    if ! [[ $exe =~ ^[0-9]+$ ]];then
-      echo -e "${RED}Enter a valid number ${WHITE}"
-    fi 
- done 
+	until [[ $exe =~ ^[0-9]+$ ]]; do
+	read exe 
+	if ! [[ $exe =~ ^[0-9]+$ ]];then
+		echo -e "${RED}Enter a valid number ${WHITE}"
+	fi 
+	done 
 }
 
 check_if_exist(){
-  while  [[ -d $project ]]; do
-    echo -e "${RED}There is a Directory with that name\nEnter a new name ${WHITE} "
-    read project
-  done
+	while  [[ -d $project ]]; do
+		echo -e "${RED}There is a Directory with that name\nEnter a new name ${WHITE} "
+		read project
+	done
 }
 create_temp_files(){
-  touch src/main.c
-  echo -e 'SRCS= \' >> Includes.mk
-  echo -e '\tmain.c' >> Includes.mk
+	touch src/main.c
+	echo -e 'SRCS= \' >> Includes.mk
+	echo -e '\tmain.c' >> Includes.mk
 
 }
 
 inital_main()
 {
-  echo  "#include <stdio.h>
-  int main(void)
-  {
-    printf(\"Hey from $project\");
-    return (0);
-  }" >> src/main.c
+	echo  "#include <stdio.h>
+	int main(void)
+	{
+		printf(\"Hey from $project\");
+		return (0);
+	}" >> src/main.c
 }
 
 create_directories(){  
-mkdir src
-mkdir includes
-touch Makefile
-touch Includes.mk
-create_temp_files
-inital_main
-echo "include Includes.mk" >> Makefile
-echo -e "CC = cc \nCFLAGS = -Wall -Werror -Werror -I.includes/ " >> Makefile
-echo -e "SRC_DIR = src\nOBJ_DIR = build" >> Makefile
-echo -e "NAME = $project ">> Makefile
-echo -e 'SRCSDIR = $(addprefix src/,$(SRCS))' >> Makefile
-echo -e 'OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCSDIR)) \n' >> Makefile
-echo -e 'all:$(NAME)\n' >> Makefile
-echo -e '$(NAME):$(OBJS)' >> Makefile
-echo -e '\t$(CC) $(OBJS) $(CFLAGS) -o $(NAME)' >> Makefile
-echo -e '$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c\n\t@mkdir -p $(OBJ_DIR)\n\t$(CC) $(CFLAGS) -c $< -o $@' >> Makefile
-echo -e 'clean:\n\trm -f $(OBJS)' >> Makefile
-echo -e 'fclean:clean\n\trm -f $(NAME) ' >> Makefile
-echo -e 're: fclean all' >> Makefile
-echo -e '.PHONY: all clean fclean re' >> Makefile
+	mkdir src
+	mkdir includes
+	touch Makefile
+	touch Includes.mk
+	create_temp_files
+	inital_main
+	echo "include Includes.mk" >> Makefile
+	echo -e "CC = cc \nCFLAGS = -Wall -Werror -Werror -I.includes/ " >> Makefile
+	echo -e "SRC_DIR = src\nOBJ_DIR = build" >> Makefile
+	echo -e "NAME = $project ">> Makefile
+	echo -e 'SRCSDIR = $(addprefix src/,$(SRCS))' >> Makefile
+	echo -e 'OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCSDIR)) \n' >> Makefile
+	echo -e 'all:$(NAME)\n' >> Makefile
+	echo -e '$(NAME):$(OBJS)' >> Makefile
+	echo -e '\t$(CC) $(OBJS) $(CFLAGS) -o $(NAME)' >> Makefile
+	echo -e '$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c\n\t@mkdir -p $(OBJ_DIR)\n\t$(CC) $(CFLAGS) -c $< -o $@' >> Makefile
+	echo -e 'clean:\n\trm -f $(OBJS)' >> Makefile
+	echo -e 'fclean:clean\n\trm -f $(NAME) ' >> Makefile
+	echo -e 're: fclean all' >> Makefile
+	echo -e '.PHONY: all clean fclean re' >> Makefile
 }
 
 git_init(){
