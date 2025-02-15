@@ -8,3 +8,4 @@ it take cares of:
 * writing an inital main.c That actually compiles
 
 While also handlings some errors :D
+ 
